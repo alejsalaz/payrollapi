@@ -10,17 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 20_221_010_135_240) do
+ActiveRecord::Schema[7.0].define(version: 20_221_010_143_226) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'citext'
   enable_extension 'pgcrypto'
   enable_extension 'plpgsql'
 
   create_table 'companies', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
-    t.string 'nit'
-    t.string 'legal_name'
+    t.string 'nit', null: false
+    t.string 'legal_name', null: false
     t.string 'display_name'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
   end
+
+  create_table 'users', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
+    t.string 'full_name', null: false
+    t.citext 'email', null: false
+    t.string 'password_digest', null: false
+    t.uuid 'company_id', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['company_id'], name: 'index_users_on_company_id'
+  end
+
+  add_foreign_key 'users', 'companies'
 end
