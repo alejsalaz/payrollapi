@@ -6,45 +6,45 @@ class User < ApplicationRecord
 
   validates :full_name,
             presence: {
-              message: 'must be present',
+              # message: 'debe estar presente',
               code: '001'
             },
             length: {
               minimum: 5,
-              too_short: 'is too short, it should be at least 5 characters long',
+              # too_short: 'es muy corto, debe contener al menos 5 caracteres',
               code: '003'
             },
             format: {
               with: /\A[\w áéíúóúÁÉÍÓÚ]+\z/,
               on: :create,
-              message: 'cannot contain special characters',
+              # message: 'no puede contener caracteres especiales',
               code: '004'
             }
 
   validates :email,
             presence: {
-              message: 'must be present',
+              # message: 'debe estar presente',
               code: '005'
             },
             uniqueness: {
-              message: 'already exists',
+              # message: 'ya existe',
               code: '006'
             },
             format: {
               with: /\A(\S+)@(.+)\.(\S+)\z/,
               on: :create,
-              message: 'cannot contain special characters',
+              # message: 'no puede contener caracteres especiales',
               code: '007'
             }
 
   validates :password,
             presence: {
-              message: 'must be present',
+              # message: 'debe estar presente',
               code: '008'
             },
             length: {
               minimum: 6,
-              too_short: 'is too short, it should be at least 6 characters long',
+              # too_short: 'es muy corto, debe contener al menos 6 caracteres',
               code: '009'
             }
 end
