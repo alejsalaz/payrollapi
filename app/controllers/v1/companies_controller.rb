@@ -3,8 +3,8 @@ module V1
     before_action :set_company, only: %i[show update destroy]
 
     def index
-      @companies = Company.order(:legal_name)
-      render json: @companies, status: :ok
+      @company = @current_user.company
+      render json: @company, status: :ok
     end
 
     def show
@@ -17,7 +17,8 @@ module V1
       if @company.save
         render json: @company, status: :created
       else
-        render json: @company.errors, status: :unprocessable_entity
+        @errors = @company.errors
+        render template: 'v1/error', status: :unprocessable_entity
       end
     end
 
@@ -25,7 +26,8 @@ module V1
       if @company.update(company_params)
         render json: @company, status: :ok
       else
-        render json: @company.errors, status: :unprocessable_entity
+        @errors = @company.errors
+        render template: 'v1/error', status: :unprocessable_entity
       end
     end
 
@@ -38,10 +40,11 @@ module V1
     private
 
     def set_company
-      @company = Company.find[params[:id]]
+      @company = Company.find_by_id(@current_user.company.id)
     end
 
     def company_params
+      # TODO: Set this to allow form-data
       params.require(:company).permit(:nit, :legal_name, :display_name)
     end
   end

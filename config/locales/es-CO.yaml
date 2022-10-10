@@ -6,6 +6,7 @@ es-CO:
         user: Usuario
     attributes:
       company:
+        nit: NIT
         legal_name: razón social
         display_name: nombre comercial
       user:
@@ -118,7 +119,7 @@ es-CO:
       month: Mes
       year: Año
   errors:
-    format: "El atributo %{attribute} %{message}."
+    format: "El parámetro %{attribute} %{message}"
     messages:
       accepted: debe ser aceptado
       blank: no puede estar en blanco

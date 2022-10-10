@@ -3,7 +3,9 @@ module V1
     before_action :set_user, only: %i[show update destroy]
 
     def index
-      @users = User.order(:email)
+      @users = User
+               .filter_by_company(@current_user.company.id)
+               .order('email')
       render json: @users, status: :ok
     end
 
@@ -17,7 +19,8 @@ module V1
       if @user.save
         render json: @user, status: :created
       else
-        render json: @user.errors, status: :unprocessable_entity
+        @errors = @user.errors
+        render template: 'error', status: :unprocessable_entity
       end
     end
 
@@ -25,7 +28,8 @@ module V1
       if @user.update(user_params)
         render json: @user, status: :ok
       else
-        render json: @user.errors, status: :unprocessable_entity
+        @errors = @user.errors
+        render template: 'error', status: :unprocessable_entity
       end
     end
 
@@ -38,7 +42,7 @@ module V1
     private
 
     def set_user
-      @user = User.find[params[:id]]
+      @user = User.find_by_id([params[:id]])
     end
 
     def user_params

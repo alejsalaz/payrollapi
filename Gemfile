@@ -54,3 +54,5 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 end
+
+gem "byebug", "~> 11.1", :groups => [:development, :test]
