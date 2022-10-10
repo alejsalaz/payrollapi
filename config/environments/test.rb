@@ -52,8 +52,6 @@ Rails.application.configure do
   # Tell Active Support which deprecation messages to disallow.
   config.active_support.disallowed_deprecation_warnings = []
 
-  # Specifies default i18n locale
-  config.i18n.default_locale = 'es-CO'
   # Raises error for missing translations.
   config.i18n.raise_on_missing_translations = true
 

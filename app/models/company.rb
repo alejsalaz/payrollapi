@@ -3,18 +3,41 @@ class Company < ApplicationRecord
 
   validates :nit,
             presence: {
-              # message: 'debe estar presente',
               code: '010'
             },
             length: {
               minimum: 8,
-              # too_short: 'es muy corto, debería contener al menos 8 caracteres',
               code: '011'
             },
             format: {
-              with: /\A[\w áéíúóúÁÉÍÓÚ]+\z/,
+              with: /\A\d+\z/,
               on: :create,
-              # message: 'no puede contener caracteres especiales',
               code: '012'
+            }
+
+  validates :legal_name,
+            presence: {
+              code: '013'
+            },
+            length: {
+              minimum: 8,
+              code: '014'
+            },
+            format: {
+              with: /\A[\w áéíúóúÁÉÍÓÚñÑ',.-]+\z/,
+              on: :create,
+              code: '015'
+            }
+
+  validates :display_name,
+            allow_blank: true,
+            length: {
+              minimum: 4,
+              code: '014'
+            },
+            format: {
+              with: /\A[\w áéíúóúÁÉÍÓÚñÑ]+\z/,
+              on: :create,
+              code: '016'
             }
 end

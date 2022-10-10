@@ -2,18 +2,16 @@
 es-CO:
   activerecord:
     models:
-      user: usuario
-      company: empresa
+        company: Empresa
+        user: Usuario
     attributes:
+      company:
+        legal_name: razón social
+        display_name: nombre comercial
       user:
         full_name: nombre completo
         email: correo electrónico
         password: contraseña
-        password_digest: contraseña
-        company_id: id de la empresa
-      company:
-        legal_name: razón social
-        display_name: nombre comercial
     errors:
       messages:
         record_invalid: 'La validación falló: %{errors}'
@@ -120,7 +118,7 @@ es-CO:
       month: Mes
       year: Año
   errors:
-    format: "%{attribute} %{message}"
+    format: "El atributo %{attribute} %{message}."
     messages:
       accepted: debe ser aceptado
       blank: no puede estar en blanco
