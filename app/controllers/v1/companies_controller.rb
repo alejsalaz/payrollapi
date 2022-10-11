@@ -4,18 +4,18 @@ module V1
 
     def index
       @company = @current_user.company
-      render json: @company, status: :ok
+      render :index, status: :ok
     end
 
     def show
-      render json: @company, status: :ok
+      render :show, status: :ok
     end
 
     def create
       @company = Company.new(company_params)
 
       if @company.save
-        render json: @company, status: :created
+        render :show, status: :created
       else
         @errors = @company.errors
         render template: 'v1/error', status: :unprocessable_entity
@@ -24,7 +24,7 @@ module V1
 
     def update
       if @company.update(company_params)
-        render json: @company, status: :ok
+        render :show, status: :ok
       else
         @errors = @company.errors
         render template: 'v1/error', status: :unprocessable_entity
@@ -44,7 +44,6 @@ module V1
     end
 
     def company_params
-      # TODO: Set this to allow form-data
       params.require(:company).permit(:nit, :legal_name, :display_name)
     end
   end

@@ -20,11 +20,11 @@ class Company < ApplicationRecord
               code: '013'
             },
             length: {
-              minimum: 8,
+              minimum: 3,
               code: '014'
             },
             format: {
-              with: /\A[\w áéíúóúÁÉÍÓÚñÑ',.-]+\z/,
+              with: /\A[a-zA-Z áéíúóúÁÉÍÓÚñÑ',.-]+\z/,
               on: :create,
               code: '015'
             }
@@ -33,11 +33,11 @@ class Company < ApplicationRecord
             allow_blank: true,
             length: {
               minimum: 4,
-              code: '014'
+              code: '016'
             },
             format: {
-              with: /\A[\w áéíúóúÁÉÍÓÚñÑ]+\z/,
+              with: /\A[a-zA-Z áéíúóúÁÉÍÓÚñÑ',.-]+\z/,
               on: :create,
-              code: '016'
+              code: '017'
             }
 end
