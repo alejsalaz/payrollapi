@@ -2,8 +2,12 @@
 
 module V1
   class UsersController < ApplicationController
+    include ErrorHandler
+
     before_action :find_user, only: %i[show update destroy]
     before_action :set_user, only: [:create]
+
+    rescue_from StandardError, with: :render_exception
 
     VERSION = 'v1'
 
@@ -23,7 +27,7 @@ module V1
       if @user.present?
         render :show, status: :ok
       else
-        render template: "#{VERSION}/unauthorized", status: :unauthorized
+        render_unauthorized
       end
     end
 
@@ -33,10 +37,10 @@ module V1
           render :show, status: :created
         else
           @errors = @user.errors
-          render template: "#{VERSION}/error", status: :unprocessable_entity
+          render_error
         end
       else
-        render template: "#{VERSION}/unauthorized", status: :unauthorized
+        render_unauthorized
       end
     end
 
@@ -46,10 +50,10 @@ module V1
           render :show, status: :ok
         else
           @errors = @user.errors
-          render template: "#{VERSION}/error", status: :unprocessable_entity
+          render_error
         end
       else
-        render template: "#{VERSION}/unauthorized", status: :unauthorized
+        render_unauthorized
       end
     end
 
@@ -59,7 +63,7 @@ module V1
 
         head :no_content
       else
-        render template: "#{VERSION}/unauthorized", status: :unauthorized
+        render_unauthorized
       end
     end
 

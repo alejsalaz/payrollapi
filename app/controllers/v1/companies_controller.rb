@@ -2,8 +2,12 @@
 
 module V1
   class CompaniesController < ApplicationController
+    include ErrorHandler
+
     before_action :find_company, only: %i[show update destroy]
     before_action :set_company, only: %i[create]
+
+    rescue_from StandardError, with: :render_exception
 
     VERSION = 'v1'
 
@@ -12,7 +16,7 @@ module V1
         @companies = Company.all.order('legal_name')
         render :index, status: :ok
       else
-        render template: "#{VERSION}/unauthorized", status: :unauthorized
+        render_unauthorized
       end
     end
 
@@ -26,23 +30,23 @@ module V1
           render :show, status: :created
         else
           @errors = @company.errors
-          render template: "#{VERSION}/error", status: :unprocessable_entity
+          render_error
         end
       else
-        render template: "#{VERSION}/unauthorized", status: :unauthorized
+        render_unauthorized
       end
     end
 
     def update
-      if %w[admin accountant].include?(@current_user.role)
+      if @current_user.role == 'admin'
         if @company.update(company_params)
           render :show, status: :ok
         else
           @errors = @company.errors
-          render template: "#{VERSION}/error", status: :unprocessable_entity
+          render_error
         end
       else
-        render template: "#{VERSION}/unauthorized", status: :unauthorized
+        render_unauthorized
       end
     end
 
@@ -52,7 +56,7 @@ module V1
 
         head :no_content
       else
-        render template: "#{VERSION}/unauthorized", status: :unauthorized
+        render_unauthorized
       end
     end
 
