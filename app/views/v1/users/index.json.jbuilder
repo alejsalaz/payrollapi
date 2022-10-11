@@ -1,4 +1,5 @@
-json.error do
-  json.mensaje @errors.full_messages[0]
-  json.referencia @errors.details.first[1][0][:code]
+json.datos @users do |user|
+  json.nombre user.full_name
+  json.correo user.email
+  json.empresa user.company.legal_name
 end

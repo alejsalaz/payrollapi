@@ -7,7 +7,7 @@ module V1
 
       if @user.authenticate(params[:password])
         token = jwt_encode(user_id: @user.id)
-        render json: { token: token }, status: :ok
+        render json: { datos: { token: token } }, status: :ok
       else
         render json: { error: 'Correo o contraseña inválidos' }, status: :unauthorized
       end
