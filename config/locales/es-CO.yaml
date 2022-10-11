@@ -13,6 +13,8 @@ es-CO:
         full_name: nombre completo
         email: correo electrónico
         password: contraseña
+        role: rol
+        company: empresa
     errors:
       messages:
         record_invalid: 'La validación falló: %{errors}'

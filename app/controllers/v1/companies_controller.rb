@@ -34,7 +34,7 @@ module V1
     end
 
     def update
-      if @current_user.role in ['admin', 'accountant']
+      if %w[admin accountant].include?(@current_user.role)
         if @company.update(company_params)
           render :show, status: :ok
         else

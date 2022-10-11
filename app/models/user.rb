@@ -1,8 +1,12 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   require 'securerandom'
 
   belongs_to :company
   has_secure_password
+
+  ROLES = %w[admin accountant user].freeze
 
   scope :filter_by_company, ->(company_id) { where company_id: company_id }
 
@@ -40,5 +44,14 @@ class User < ApplicationRecord
             length: {
               minimum: 6,
               code: '009'
+            }
+
+  validates :role,
+            presence: {
+              code: '010'
+            },
+            inclusion: {
+              in: ROLES,
+              code: '011'
             }
 end

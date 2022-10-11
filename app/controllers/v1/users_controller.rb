@@ -28,12 +28,12 @@ module V1
     end
 
     def create
-      if @current_user.role in ['admin', 'accountant']
+      if %w[admin accountant].include?(@current_user.role)
         if @user.save
           render :show, status: :created
         else
           @errors = @user.errors
-          render template: 'error', status: :unprocessable_entity
+          render template: "#{VERSION}/error", status: :unprocessable_entity
         end
       else
         render template: "#{VERSION}/unauthorized", status: :unauthorized
@@ -41,12 +41,12 @@ module V1
     end
 
     def update
-      if @current_user.role in ['admin', 'accountant']
+      if %w[admin accountant].include?(@current_user.role)
         if @user.update(check_params)
           render :show, status: :ok
         else
           @errors = @user.errors
-          render template: 'error', status: :unprocessable_entity
+          render template: "#{VERSION}/error", status: :unprocessable_entity
         end
       else
         render template: "#{VERSION}/unauthorized", status: :unauthorized
@@ -54,7 +54,7 @@ module V1
     end
 
     def destroy
-      if @current_user.role in ['admin', 'accountant']
+      if %w[admin accountant].include?(@current_user.role)
         @user.destroy
 
         head :no_content
@@ -70,7 +70,7 @@ module V1
       when 'admin'
         user_params
       when 'accountant'
-        user_params.except[:role]
+        user_params.tap { |param| param.delete(:role) }
       end
     end
 
@@ -80,11 +80,11 @@ module V1
 
     def find_user
       @user = if @current_user.role == 'admin'
-                User.find_by_email([params[:email]])
+                User.find_by_id([params[:id]])
               else
                 User
                   .filter_by_company(@current_user.company.id)
-                  .find_by_email([params[:email]])
+                  .find_by_id([params[:id]])
               end
     end
 
