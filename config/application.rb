@@ -1,6 +1,6 @@
-require_relative "boot"
+require_relative 'boot'
 
-require "rails/all"
+require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -23,5 +23,9 @@ module Payrollapi
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '*.{rb,yml,yaml}')]
+    # Specifies default i18n locale
+    config.i18n.default_locale = 'es-CO'
   end
 end
