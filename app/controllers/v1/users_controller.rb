@@ -32,6 +32,7 @@ module V1
     end
 
     def create
+      # TODO: This should be a sign in
       if %w[admin accountant].include?(@current_user.role)
         if @user.save
           render :show, status: :created

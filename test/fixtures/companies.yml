@@ -1,11 +1,15 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  nit: MyString
-  legal_name: MyString
-  display_name: MyString
+valid_company:
+  nit: 990253175
+  legal_name: Parisian and Sons
+  display_name: Parisianapp
 
-two:
-  nit: MyString
-  legal_name: MyString
-  display_name: MyString
+another_valid_company:
+  nit: 990355374
+  legal_name: Huel LLC
+
+invalid_company:
+  nit: 92
+  legal_name: S2
+  display_name: S5
