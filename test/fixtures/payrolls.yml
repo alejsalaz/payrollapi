@@ -1,0 +1,39 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  employee: one
+  period: one
+  salary_income: 9.99
+  non_salary_income: 9.99
+  deduction: 9.99
+  transportation: 9.99
+  healthcare: 9.99
+  pension: 9.99
+  solidarity_fund: 9.99
+  subsistence_account: 9.99
+  compensation_fund: 9.99
+  icbf: 9.99
+  sena: 9.99
+  severance: 9.99
+  interest: 9.99
+  premium: 9.99
+  vacation: 9.99
+
+two:
+  employee: two
+  period: two
+  salary_income: 9.99
+  non_salary_income: 9.99
+  deduction: 9.99
+  transportation: 9.99
+  healthcare: 9.99
+  pension: 9.99
+  solidarity_fund: 9.99
+  subsistence_account: 9.99
+  compensation_fund: 9.99
+  icbf: 9.99
+  sena: 9.99
+  severance: 9.99
+  interest: 9.99
+  premium: 9.99
+  vacation: 9.99

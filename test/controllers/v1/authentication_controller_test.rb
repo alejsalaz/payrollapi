@@ -7,12 +7,18 @@ module V1
     include AuthorizationHelper
 
     setup do
-      @user = users(:valid_user)
+      @valid_user = users(:valid_user)
+      @invalid_user = users(:invalid_user)
     end
 
     test 'should login with valid user' do
-      login(@user)
+      login(@valid_user)
       assert_response :success
+    end
+
+    test 'should not login with invalid user' do
+      login(@invalid_user)
+      assert_response :unauthorized
     end
   end
 end

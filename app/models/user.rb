@@ -4,6 +4,7 @@ class User < ApplicationRecord
   require 'securerandom'
 
   belongs_to :company
+  has_many :payrolls
   has_secure_password
 
   ROLES = %w[admin accountant user].freeze
@@ -20,7 +21,6 @@ class User < ApplicationRecord
             },
             format: {
               with: /\A[\w áéíúóúÁÉÍÓÚñÑ]+\z/,
-              on: :create,
               code: '004'
             }
 
@@ -33,7 +33,6 @@ class User < ApplicationRecord
             },
             format: {
               with: /\A(\S+)@(.+)\.(\S+)\z/,
-              on: :create,
               code: '007'
             }
 
