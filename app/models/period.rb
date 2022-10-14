@@ -7,39 +7,40 @@ class Period < ApplicationRecord
 
   STATES = %w[paid draft failed].freeze
 
-  validate :valid_dates?
+  validate :dates_format
+  validate :dates_coherence
 
   validates :start_date,
             presence: {
-              code: '024'
+              code: '025'
             },
             uniqueness: {
               case_sensitive: false,
-              code: '025'
+              code: '026'
             },
             inclusion: {
               in: ((Date.new(Date.today.year, Date.today.month))..(2.years.ago)),
-              code: '026'
+              code: '027'
             }
   validates :end_date,
             presence: {
-              code: '027'
+              code: '028'
             },
             uniqueness: {
               case_sensitive: false,
-              code: '028'
+              code: '029'
             },
             inclusion: {
               in: ((Date.new(Date.today.year, Date.today.month).end_of_month)..(2.years.ago)),
-              code: '029'
+              code: '030'
             }
 
   validates :state,
             presence: {
-              code: '030'
+              code: '031'
             },
             inclusion: {
               in: STATES,
-              code: '031'
+              code: '032'
             }
 end

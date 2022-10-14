@@ -7,16 +7,16 @@ class Payroll < ApplicationRecord
 
   validates :salary_income,
             numericality: {
-              code: '032'
+              code: '033'
             }
 
   validates :non_salary_income,
             numericality: {
-              code: '033'
+              code: '034'
             }
 
   validates :deduction,
             numericality: {
-              code: '034'
+              code: '035'
             }
 end

@@ -2,7 +2,6 @@
 
 Rails.application.routes.draw do
   resources :payrolls
-  resources :contracts
   resources :employees
   resources :periods
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

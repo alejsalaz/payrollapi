@@ -4,6 +4,7 @@ es-CO:
     models:
         company: Empresa
         user: Usuario
+        employee: Empleado
     attributes:
       company:
         nit: NIT
@@ -15,6 +16,16 @@ es-CO:
         password: contraseña
         role: rol
         company: empresa
+      employee:
+        company: empresa
+        card_id: número de cédula
+        full_name: nombre completo
+        risk_class: clase de riesgo
+        job_title: cargo
+        base_salary: salario base
+        start_date: fecha de contratación
+        termination_date: fecha de terminación
+        type: tipo de contrato
     errors:
       messages:
         record_invalid: 'La validación falló: %{errors}'

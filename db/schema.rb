@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 20_221_013_224_649) do
+ActiveRecord::Schema[7.0].define(version: 20_221_014_173_547) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'citext'
   enable_extension 'pgcrypto'
@@ -31,28 +31,19 @@ ActiveRecord::Schema[7.0].define(version: 20_221_013_224_649) do
     t.datetime 'updated_at', null: false
   end
 
-  create_table 'contracts', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
-    t.uuid 'employee_id', null: false
-    t.string 'job_title', null: false
-    t.decimal 'base_salary', null: false
-    t.date 'start_date', null: false
-    t.date 'termination_date', null: false
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.enum 'type', null: false, enum_type: 'contract_type'
-    t.index ['employee_id'], name: 'index_contracts_on_employee_id'
-  end
-
   create_table 'employees', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
     t.string 'card_id', null: false
     t.uuid 'company_id', null: false
     t.string 'full_name', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
-    t.uuid 'contract_id', null: false
     t.enum 'risk_class', null: false, enum_type: 'employee_risk_class'
+    t.string 'job_title', null: false
+    t.decimal 'base_salary', null: false
+    t.date 'start_date', null: false
+    t.date 'termination_date', null: false
+    t.enum 'type', null: false, enum_type: 'contract_type'
     t.index ['company_id'], name: 'index_employees_on_company_id'
-    t.index ['contract_id'], name: 'index_employees_on_contract_id'
   end
 
   create_table 'payrolls', id: :uuid, default: -> { 'gen_random_uuid()' }, force: :cascade do |t|
@@ -102,9 +93,7 @@ ActiveRecord::Schema[7.0].define(version: 20_221_013_224_649) do
     t.index ['company_id'], name: 'index_users_on_company_id'
   end
 
-  add_foreign_key 'contracts', 'employees'
   add_foreign_key 'employees', 'companies'
-  add_foreign_key 'employees', 'contracts'
   add_foreign_key 'payrolls', 'employees'
   add_foreign_key 'payrolls', 'periods'
   add_foreign_key 'periods', 'companies'
