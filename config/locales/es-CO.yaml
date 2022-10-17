@@ -5,6 +5,8 @@ es-CO:
         company: Empresa
         user: Usuario
         employee: Empleado
+        period: Periodo
+        payroll: Nómina
     attributes:
       company:
         nit: NIT
@@ -25,7 +27,18 @@ es-CO:
         base_salary: salario base
         start_date: fecha de contratación
         termination_date: fecha de terminación
-        type: tipo de contrato
+        contract_type: tipo de contrato
+      period:
+        start_date: fecha de contratación
+        end_date: fecha de terminación del contrato
+        state: estado
+        company: empresa
+      payroll:
+        salary_income: ingresos salariales
+        non_salary_income: ingresos no salariales
+        deduction: deducciones
+        employee: empleado
+        period: periodo
     errors:
       messages:
         record_invalid: 'La validación falló: %{errors}'

@@ -19,7 +19,10 @@ class Period < ApplicationRecord
               code: '026'
             },
             inclusion: {
-              in: ((Date.new(Date.today.year, Date.today.month))..(2.years.ago)),
+              in: (
+                (Date.new(Date.today.year, Date.today.month) - 2.years)..
+                (Date.new(Date.today.year, Date.today.month))
+              ),
               code: '027'
             }
   validates :end_date,
@@ -31,7 +34,10 @@ class Period < ApplicationRecord
               code: '029'
             },
             inclusion: {
-              in: ((Date.new(Date.today.year, Date.today.month).end_of_month)..(2.years.ago)),
+              in: (
+                (Date.new(Date.today.year, Date.today.month) - 2.years).end_of_month..
+                (Date.new(Date.today.year, Date.today.month).end_of_month)
+              ),
               code: '030'
             }
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 20_221_014_173_547) do
+ActiveRecord::Schema[7.0].define(version: 20_221_017_172_141) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'citext'
   enable_extension 'pgcrypto'
@@ -42,7 +42,7 @@ ActiveRecord::Schema[7.0].define(version: 20_221_014_173_547) do
     t.decimal 'base_salary', null: false
     t.date 'start_date', null: false
     t.date 'termination_date', null: false
-    t.enum 'type', null: false, enum_type: 'contract_type'
+    t.enum 'contract_type', null: false, enum_type: 'contract_type'
     t.index ['company_id'], name: 'index_employees_on_company_id'
   end
 

@@ -4,6 +4,7 @@ class Employee < ApplicationRecord
   include SalaryHelper
 
   belongs_to :company
+  has_many :payrolls
 
   CLASSES = %w[
     i
@@ -20,6 +21,8 @@ class Employee < ApplicationRecord
     'apprenticeship',
     'temporary'
   ].freeze
+
+  validate :valid_minimum_wage?
 
   validates :card_id,
             presence: {
@@ -76,10 +79,6 @@ class Employee < ApplicationRecord
   validates :base_salary,
             presence: {
               code: '048'
-            },
-            numericality: {
-              greater_than_or_equal_to: MINIMUM_WAGE,
-              code: '049'
             }
 
   validates :start_date,
@@ -97,7 +96,7 @@ class Employee < ApplicationRecord
               code: '053'
             }
 
-  validates :type,
+  validates :contract_type,
             presence: {
               code: '054'
             },

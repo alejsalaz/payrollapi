@@ -11,14 +11,15 @@ module DateHelper
   end
 
   def dates_coherence
-    return if (
+    dates_difference = (
       Date.strptime(end_date.to_s, '%Y-%m-%d') -
       Date.strptime(start_date.to_s, '%Y-%m-%d')
-    ).to_i > 27
+    ).to_i.abs
+    return if dates_difference > 26 && dates_difference < 31
 
     errors.add(
       :base,
-      'la fecha inicial debe estar por lo menos 27 días después de la fecha final',
+      'las fechas inicial y final corresponden al inicio y fin del mes respectivamente ',
       code: '024'
     )
   end

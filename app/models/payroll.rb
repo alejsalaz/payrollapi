@@ -3,7 +3,6 @@
 class Payroll < ApplicationRecord
   belongs_to :employee
   belongs_to :period
-  belongs_to :user
 
   validates :salary_income,
             numericality: {
