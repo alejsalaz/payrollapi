@@ -4,6 +4,7 @@ class Period < ApplicationRecord
   include DateHelper
 
   belongs_to :company
+  has_many :payrolls
 
   STATES = %w[paid draft failed].freeze
 

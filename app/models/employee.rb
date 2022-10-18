@@ -26,7 +26,8 @@ class Employee < ApplicationRecord
 
   validates :card_id,
             presence: {
-              code: '036'
+              # TODO: Codes are pending
+              code: 'pending'
             },
             uniqueness: {
               case_sensitive: false,
@@ -51,7 +52,7 @@ class Employee < ApplicationRecord
             },
             format: {
               with: /\A[\w áéíúóúÁÉÍÓÚñÑ]+\z/,
-              code: '042'
+              code: 'pending'
             }
 
   validates :risk_class,
@@ -60,7 +61,7 @@ class Employee < ApplicationRecord
             },
             inclusion: {
               in: CLASSES,
-              code: '044'
+              code: 'pending'
             }
 
   validates :job_title,
@@ -83,11 +84,11 @@ class Employee < ApplicationRecord
 
   validates :start_date,
             presence: {
-              code: '050'
+              code: 'pending'
             },
             inclusion: {
               in: ((77.years.ago)..(1.days.from_now)),
-              code: '051'
+              code: 'pending'
             }
 
   validates :termination_date,
@@ -104,4 +105,17 @@ class Employee < ApplicationRecord
               in: TYPES,
               code: '055'
             }
+
+  private
+
+  def valid_minimum_wage?
+    return true if contract_type != 'apprenticeship' && base_salary > MINIMUM_WAGE
+    return true if contract_type.eql?('apprenticeship') && base_salary > MINIMUM_WAGE * SENA_APPRENTICESHIP
+
+    errors.add(
+      :base,
+      'la cantidad ingresada es incorrecta',
+      code: '049'
+    )
+  end
 end

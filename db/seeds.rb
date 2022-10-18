@@ -121,7 +121,4 @@ end
   )
 end
 
-10.times do |n|
-  m = (Date.strptime(Date.new(Date.today.year, (n - 10).abs).to_s, '%Y-%m-%d') - Date.strptime(Date.new(Date.today.year, (n - 10).abs).end_of_month.to_s, '%Y-%m-%d')).abs
-  puts "----- #{m} /// #{Date.new(Date.today.year, (n - 10).abs)} :::: #{Date.new(Date.today.year, (n - 10).abs)}" if m < 27
-end
+# p = Payroll.new(employee: Employee.find_by(card_id: '11111185369'), period_id: Employee.find_by(card_id: '11111185369').company.periods.last.id)
