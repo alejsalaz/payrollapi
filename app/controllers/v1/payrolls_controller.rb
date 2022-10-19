@@ -71,30 +71,28 @@ module V1
     def find_payroll
       @payroll = case @current_user.role
                  when 'admin'
-                   Payroll.all.order('created_at ASC')
-                          .find_by(id: params[:id])
+                   Payroll
+                 .all
+                 .find_by(id: params[:id])
                  when 'accountant'
                    Payroll
-                 .joins(:period).where(periods: { company_id: Company.find_by(id: @current_user.company.id) })
-                 .order('created_at DESC')
+                 .joins(:period).where(periods: { company_id: @current_user.company.id })
                  .find_by(id: params[:id])
                  else
                    # TODO: an account should always belong to an employee
                    Payroll
                  .joins(:employee).where(employee: { full_name: @current_user.full_name })
-                 .order('created_at DESC')
                  .find_by(id: params[:id])
                  end
     end
 
     def payroll_params
-      # params.require(:payroll).permit(:employee_id, :payroll_id, :salary_income, :non_salary_income, :deduction, :transportation, :healthcare, :pension, :solidarity_fund, :subsistence_account, :compensation_fund, :icbf, :sena, :severance, :interest, :premium, :vacation)
-
       {
-        start_date: params[:payroll][:start_date],
-        end_date: params[:payroll][:end_date],
-        state: params[:payroll][:state],
-        company_id: Company.find_by(nit: params[:payroll][:company_nit]).id
+        employee_id: Employee.find_by(card_id: params[:payroll][:employee]).id,
+        period_id: Period.find_by(start_date: params[:payroll][:period]).id,
+        salary_income: params[:payroll][:salary_income],
+        non_salary_income: params[:payroll][:non_salary_income],
+        deduction: params[:payroll][:deduction]
       }
     end
   end

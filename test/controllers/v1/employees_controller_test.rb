@@ -1,38 +1,22 @@
-require "test_helper"
+require 'test_helper'
 
-class EmployeesControllerTest < ActionDispatch::IntegrationTest
-  setup do
-    @employee = employees(:one)
-  end
+module V1
+  class EmployeesControllerTest < ActionDispatch::IntegrationTest
+    should rescue_from(StandardError)
+      .with(:render_exception)
 
-  test "should get index" do
-    get employees_url, as: :json
-    assert_response :success
-  end
+    should route(:get, 'v1/employees')
+      .to(controller: :'v1/employees', action: :index)
+    should route(:get, 'v1/employees/1')
+      .to(controller: :'v1/employees', action: :show, id: 1)
+    should route(:post, 'v1/employees')
+      .to(controller: :'v1/employees', action: :create)
+    should route(:put, 'v1/employees/1')
+      .to(controller: :'v1/employees', action: :update, id: 1)
+    should route(:delete, 'v1/employees/1')
+      .to(controller: :'v1/employees', action: :destroy, id: 1)
 
-  test "should create employee" do
-    assert_difference("Employee.count") do
-      post employees_url, params: { employee: { card_id: @employee.card_id, company_id: @employee.company_id, contract_id: @employee.contract_id, full_name: @employee.full_name } }, as: :json
-    end
-
-    assert_response :created
-  end
-
-  test "should show employee" do
-    get employee_url(@employee), as: :json
-    assert_response :success
-  end
-
-  test "should update employee" do
-    patch employee_url(@employee), params: { employee: { card_id: @employee.card_id, company_id: @employee.company_id, contract_id: @employee.contract_id, full_name: @employee.full_name } }, as: :json
-    assert_response :success
-  end
-
-  test "should destroy employee" do
-    assert_difference("Employee.count", -1) do
-      delete employee_url(@employee), as: :json
-    end
-
-    assert_response :no_content
+    should use_before_action(:find_employee)
+    should use_before_action(:set_employee)
   end
 end

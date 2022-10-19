@@ -38,21 +38,13 @@ PERIODS = %w[
   failed
 ].freeze
 
+# Datos mínimos:
+
 Company.create!(
   nit: '9009261473',
   legal_name: 'Grupo Quincena S.A.S.',
   display_name: 'Aleluya'
 )
-
-7.times do |n|
-  name = Faker::Company.unique.name
-
-  Company.create!(
-    nit: rand(9_000_000_000..9_999_999_999).to_s,
-    legal_name: "#{name} #{COMPANIES.sample}",
-    display_name: n.odd? ? "#{name.split(/\W/).first}app" : nil
-  )
-end
 
 User.create!(
   full_name: 'Alejandro Salazar Zapata',
@@ -114,6 +106,16 @@ Employee.create!(
   contract_type: 'fixed-term'
 )
 
+7.times do |n|
+  name = Faker::Company.unique.name
+
+  Company.create!(
+    nit: rand(9_000_000_000..9_999_999_999).to_s,
+    legal_name: "#{name} #{COMPANIES.sample}",
+    display_name: n.odd? ? "#{name.split(/\W/).first}app" : nil
+  )
+end
+
 14.times do |n|
   User.create!(
     full_name: Faker::Name.unique.name.gsub(/[^[\w áéíúóúÁÉÍÓÚñÑ]+$]/, ''),
@@ -136,46 +138,45 @@ Employee.create!(
   )
 end
 
-10.times do |n|
-  Period.create!(
-    start_date: Date.new(Date.today.year, (n - 10).abs),
-    end_date: Date.new(Date.today.year, (n - 10).abs).end_of_month,
-    state: PERIODS.sample,
-    company_id: Company.find_by(nit: '9009261473').id
-  )
+# Poblando la base de datos
 
-  Period.create!(
-    start_date: Date.new(Date.today.year, (n - 10).abs),
-    end_date: Date.new(Date.today.year, (n - 10).abs).end_of_month,
-    state: PERIODS.sample,
-    company_id: Company.where.not(id: Company.find_by(nit: '9009261473').id).sample.id
-  )
+# 10.times do |n|
+#   Period.create!(
+#     start_date: Date.new(Date.today.year, (n - 10).abs),
+#     end_date: Date.new(Date.today.year, (n - 10).abs).end_of_month,
+#     state: PERIODS.sample,
+#     company_id: Company.find_by(nit: '9009261473').id
+#   )
 
-  Employee.find_by(card_id: '11111185369').company.periods.each do |period|
-    Payroll.create!(
-      employee_id: Employee.find_by(card_id: '11111185369').id,
-      period_id: period.id
-    )
-  end
-end
+#   Period.create!(
+#     start_date: Date.new(Date.today.year, (n - 10).abs),
+#     end_date: Date.new(Date.today.year, (n - 10).abs).end_of_month,
+#     state: PERIODS.sample,
+#     company_id: Company.where.not(id: Company.find_by(nit: '9009261473').id).sample.id
+#   )
 
-140.times do |_n|
-  Company.where.not(id: Company.find_by(nit: '9009261473').id).each do |company|
-    next if company.periods.nil?
+#   Employee.find_by(card_id: '11111185369').company.periods.each do |period|
+#     Payroll.create!(
+#       employee_id: Employee.find_by(card_id: '11111185369').id,
+#       period_id: period.id
+#     )
+#   end
+# end
 
-    company.periods.each do |period|
-      company.employees.each do |employee|
-        Payroll.create!(
-          employee_id: employee.id,
-          period_id: period.id,
-          salary_income: rand(0..999_999),
-          non_salary_income: rand(0..999_999),
-          deduction: rand(0..999_999)
-        )
-      end
-    end
-  end
-end
+# 140.times do |_n|
+#   Company.where.not(id: Company.find_by(nit: '9009261473').id).each do |company|
+#     next if company.periods.nil?
 
-
-Payroll.create(employee_id: employee.id, period_id: define_period(find_company))
+#     company.periods.each do |period|
+#       company.employees.each do |employee|
+#         Payroll.create!(
+#           employee_id: employee.id,
+#           period_id: period.id,
+#           salary_income: rand(0..999_999),
+#           non_salary_income: rand(0..999_999),
+#           deduction: rand(0..999_999)
+#         )
+#       end
+#     end
+#   end
+# end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 20_221_018_143_608) do
+ActiveRecord::Schema[7.0].define(version: 20_221_019_185_106) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'citext'
   enable_extension 'pgcrypto'
@@ -69,6 +69,7 @@ ActiveRecord::Schema[7.0].define(version: 20_221_018_143_608) do
     t.decimal 'employer_healthcare', precision: 17, scale: 2, default: '0.0', null: false
     t.decimal 'employer_pension', precision: 17, scale: 2, default: '0.0', null: false
     t.decimal 'arl', precision: 17, scale: 2, default: '0.0', null: false
+    t.index %w[employee_id period_id], name: 'index_payrolls_on_employee_id_and_period_id', unique: true
     t.index ['employee_id'], name: 'index_payrolls_on_employee_id'
     t.index ['period_id'], name: 'index_payrolls_on_period_id'
   end

@@ -1,7 +1,69 @@
-require "test_helper"
+require 'test_helper'
 
 class PayrollTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  # Relations
+  should belong_to(:employee)
+  should belong_to(:period)
+  # Validations
+  should allow_values(1_000_000, 750_000, 2_500_000)
+    .for(:salary_income)
+  should_not allow_values('superadmin', '1ooooooo', '1+1', '')
+    .for(:salary_income)
+  should validate_numericality_of(:salary_income)
+
+  should allow_values(1_000_000, 750_000, 2_500_000)
+    .for(:non_salary_income)
+  should_not allow_values('superadmin', '1ooooooo', '1+1', '')
+    .for(:non_salary_income)
+  should validate_numericality_of(:non_salary_income)
+
+  should allow_values(1_000_000, 750_000, 2_500_000)
+    .for(:deduction)
+  should_not allow_values('superadmin', '1ooooooo', '1+1', '')
+    .for(:deduction)
+  should validate_numericality_of(:deduction)
+
+  # Columns
+  should have_db_column(:id)
+    .of_type(:uuid)
+  should have_db_column(:employee_id)
+    .of_type(:uuid)
+  should have_db_column(:period_id)
+    .of_type(:uuid)
+  should have_db_column(:salary_income)
+    .of_type(:decimal)
+  should have_db_column(:non_salary_income)
+    .of_type(:decimal)
+  should have_db_column(:deduction)
+    .of_type(:decimal)
+  should have_db_column(:transportation)
+    .of_type(:decimal)
+  should have_db_column(:employee_healthcare)
+    .of_type(:decimal)
+  should have_db_column(:employee_pension)
+    .of_type(:decimal)
+  should have_db_column(:solidarity_fund)
+    .of_type(:decimal)
+  should have_db_column(:subsistence_account)
+    .of_type(:decimal)
+  should have_db_column(:compensation_fund)
+    .of_type(:decimal)
+  should have_db_column(:icbf)
+    .of_type(:decimal)
+  should have_db_column(:sena)
+    .of_type(:decimal)
+  should have_db_column(:severance)
+    .of_type(:decimal)
+  should have_db_column(:interest)
+    .of_type(:decimal)
+  should have_db_column(:premium)
+    .of_type(:decimal)
+  should have_db_column(:vacation)
+    .of_type(:decimal)
+  should have_db_column(:employer_healthcare)
+    .of_type(:decimal)
+  should have_db_column(:employer_pension)
+    .of_type(:decimal)
+  should have_db_column(:arl)
+    .of_type(:decimal)
 end

@@ -1,14 +1,14 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  employee: one
-  period: one
+valid_payroll:
+  employee: valid_employee
+  period: valid_period
   salary_income: 9.99
   non_salary_income: 9.99
   deduction: 9.99
   transportation: 9.99
-  healthcare: 9.99
-  pension: 9.99
+  employee_healthcare: 9.99
+  employee_pension: 9.99
   solidarity_fund: 9.99
   subsistence_account: 9.99
   compensation_fund: 9.99
@@ -18,22 +18,28 @@ one:
   interest: 9.99
   premium: 9.99
   vacation: 9.99
+  employer_healthcare: 9.99
+  employer_pension: 9.99
+  arl: 9.99
 
-two:
-  employee: two
-  period: two
-  salary_income: 9.99
-  non_salary_income: 9.99
-  deduction: 9.99
-  transportation: 9.99
-  healthcare: 9.99
-  pension: 9.99
-  solidarity_fund: 9.99
-  subsistence_account: 9.99
-  compensation_fund: 9.99
-  icbf: 9.99
-  sena: 9.99
-  severance: 9.99
-  interest: 9.99
-  premium: 9.99
-  vacation: 9.99
+invalid_payroll:
+  employee: invalid_employee
+  period: invalid_period
+  salary_income: 0
+  non_salary_income: 0
+  deduction: 0
+  transportation: 0
+  employee_healthcare: 0
+  employee_pension: 0
+  solidarity_fund: 0
+  subsistence_account: 0
+  compensation_fund: 0
+  icbf: 0
+  sena: 0
+  severance: 0
+  interest: 0
+  premium: 0
+  vacation: 0
+  employer_healthcare: 0
+  employer_pension: 0
+  arl: 0

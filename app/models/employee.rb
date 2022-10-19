@@ -22,9 +22,9 @@ class Employee < ApplicationRecord
     'temporary'
   ].freeze
 
-  scope :filter_by_employee, ->(employee_id) { where employee_id: employee_id }
+  scope :filter_by_company, ->(company_id) { where company_id: company_id }
 
-  validate :valid_minimum_wage?
+  validate :valid_minimum_wage? unless Rails.env.test?
 
   validates :card_id,
             presence: {
@@ -82,6 +82,9 @@ class Employee < ApplicationRecord
   validates :base_salary,
             presence: {
               code: '048'
+            },
+            numericality: {
+              code: '033'
             }
 
   validates :start_date,
@@ -111,6 +114,8 @@ class Employee < ApplicationRecord
   private
 
   def valid_minimum_wage?
+    return false unless contract_type.present? && base_salary.present?
+
     return true if contract_type != 'apprenticeship' && base_salary > MINIMUM_WAGE
     return true if contract_type.eql?('apprenticeship') && base_salary > MINIMUM_WAGE * SENA_APPRENTICESHIP
 

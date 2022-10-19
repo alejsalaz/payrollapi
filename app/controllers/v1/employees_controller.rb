@@ -11,7 +11,7 @@ module V1
 
     def index
       @employees = if @current_user.role == 'admin'
-                     Employee.all.order('email')
+                     Employee.all.order('full_name')
                    else
                      Employee
                        .filter_by_company(@current_user.company.id)
