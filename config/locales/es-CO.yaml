@@ -4,6 +4,9 @@ es-CO:
     models:
         company: Empresa
         user: Usuario
+        employee: Empleado
+        period: Periodo
+        payroll: Nómina
     attributes:
       company:
         nit: NIT
@@ -15,6 +18,27 @@ es-CO:
         password: contraseña
         role: rol
         company: empresa
+      employee:
+        company: empresa
+        card_id: número de cédula
+        full_name: nombre completo
+        risk_class: clase de riesgo
+        job_title: cargo
+        base_salary: salario base
+        start_date: fecha de contratación
+        termination_date: fecha de terminación
+        contract_type: tipo de contrato
+      period:
+        start_date: fecha de contratación
+        end_date: fecha de terminación del contrato
+        state: estado
+        company: empresa
+      payroll:
+        salary_income: ingresos salariales
+        non_salary_income: ingresos no salariales
+        deduction: deducciones
+        employee: empleado
+        period: periodo
     errors:
       messages:
         record_invalid: 'La validación falló: %{errors}'
@@ -232,3 +256,14 @@ es-CO:
       long: "%A, %d de %B de %Y a las %I:%M %p"
       short: "%d de %b a las %H:%M hrs"
     pm: pm
+  views:
+    employees:
+      apprenticeship: contrato de aprendizaje
+      fixed-term: término fijo
+      indefinite: indefinido
+      temporary: temporal
+      work or labor: por obra
+    periods:
+      paid: pagado
+      draft: borrador
+      failed: fallido

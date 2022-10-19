@@ -20,7 +20,6 @@ class User < ApplicationRecord
             },
             format: {
               with: /\A[\w áéíúóúÁÉÍÓÚñÑ]+\z/,
-              on: :create,
               code: '004'
             }
 
@@ -33,7 +32,6 @@ class User < ApplicationRecord
             },
             format: {
               with: /\A(\S+)@(.+)\.(\S+)\z/,
-              on: :create,
               code: '007'
             }
 

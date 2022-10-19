@@ -1,13 +1,19 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  full_name: MyString
-  email: 
-  password_digest: MyString
-  company_id: one
+valid_user:
+  full_name: Eduardo Anderson
+  email: adria@koch.io
+  password_digest: <%= BCrypt::Password.create('K0qLnU56c948V') %>
+  company: valid_company
 
-two:
-  full_name: MyString
-  email: 
-  password_digest: MyString
-  company_id: two
+another_valid_user:
+  full_name: Brianne Schmitt
+  email: shirlene@torphylindgren.info
+  password_digest: <%= BCrypt::Password.create('FwBkT4zD6qY') %>
+  company: valid_company
+
+invalid_user:
+  full_name: R1ch3ll3 L@ng
+  email: carl_swift@hills-hand
+  password_digest: <%= BCrypt::Password.create('HoO') %>
+  company: invalid_company

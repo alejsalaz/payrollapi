@@ -45,6 +45,11 @@ gem 'bootsnap', require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem "rack-cors"
 
+# Simple one-liner tests for common Rails functionality
+group :test do
+  gem 'shoulda', '~> 4.0'
+end
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
@@ -53,6 +58,6 @@ end
 group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+  # Byebug is a simple to use and feature rich debugger for Ruby
+  gem 'byebug', '~> 11.1', groups: %i[development test]
 end
-
-gem "byebug", "~> 11.1", :groups => [:development, :test]

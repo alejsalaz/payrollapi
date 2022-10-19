@@ -1,5 +1,4 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
+# frozen_string_literal: true
 
 COMPANIES = [
   'S.A.',
@@ -17,21 +16,35 @@ ROLES = %w[
   user
 ].freeze
 
+CLASSES = %w[
+  i
+  ii
+  iii
+  iv
+  v
+].freeze
+
+TYPES = [
+  'work or labor',
+  'fixed-term',
+  'indefinite',
+  'apprenticeship',
+  'temporary'
+].freeze
+
+PERIODS = %w[
+  paid
+  draft
+  failed
+].freeze
+
+# Datos mínimos:
+
 Company.create!(
   nit: '9009261473',
   legal_name: 'Grupo Quincena S.A.S.',
   display_name: 'Aleluya'
 )
-
-7.times do |n|
-  name = Faker::Company.unique.name
-
-  Company.create!(
-    nit: rand(9_000_000_000..9_999_999_999).to_s,
-    legal_name: "#{name} #{COMPANIES.sample}",
-    display_name: n.odd? ? "#{name.split(/\W/).first}app" : nil
-  )
-end
 
 User.create!(
   full_name: 'Alejandro Salazar Zapata',
@@ -57,7 +70,53 @@ User.create!(
   role: 'user'
 )
 
-14.times do
+Employee.create!(
+  card_id: '11111185369',
+  company_id: Company.find_by(nit: '9009261473').id,
+  full_name: 'Alejandro Salazar Zapata',
+  risk_class: 'v',
+  job_title: 'Desarrollador backend',
+  base_salary: '750000',
+  start_date: '2022/07/18',
+  termination_date: '2023/01/17',
+  contract_type: 'apprenticeship'
+)
+
+Employee.create!(
+  card_id: '1864836326',
+  company_id: Company.find_by(nit: '9009261473').id,
+  full_name: 'Cristian Rojas Betancur',
+  risk_class: 'iv',
+  job_title: 'Desarrollador backend',
+  base_salary: '1300000',
+  start_date: '2022/07/18',
+  termination_date: '2023/11/17',
+  contract_type: 'fixed-term'
+)
+
+Employee.create!(
+  card_id: '1569372642',
+  company_id: Company.find_by(nit: '9009261473').id,
+  full_name: 'Carolina Diaz Gomez',
+  risk_class: 'iii',
+  job_title: 'Desarrollador backend',
+  base_salary: '1300000',
+  start_date: '2022/07/18',
+  termination_date: '2023/11/17',
+  contract_type: 'fixed-term'
+)
+
+7.times do |n|
+  name = Faker::Company.unique.name
+
+  Company.create!(
+    nit: rand(9_000_000_000..9_999_999_999).to_s,
+    legal_name: "#{name} #{COMPANIES.sample}",
+    display_name: n.odd? ? "#{name.split(/\W/).first}app" : nil
+  )
+end
+
+14.times do |n|
   User.create!(
     full_name: Faker::Name.unique.name.gsub(/[^[\w áéíúóúÁÉÍÓÚñÑ]+$]/, ''),
     email: Faker::Internet.unique.email,
@@ -65,4 +124,59 @@ User.create!(
     company_id: Company.all.sample.id,
     role: ROLES.sample
   )
+
+  Employee.create!(
+    card_id: n.odd? ? rand(40_000_000..49_999_999).to_s : rand(1_000_000_000..1_999_999_999).to_s,
+    company_id: Company.all.sample.id,
+    full_name: Faker::Name.unique.name.gsub(/[^[\w áéíúóúÁÉÍÓÚñÑ]+$]/, ''),
+    risk_class: CLASSES.sample,
+    job_title: Faker::Job.unique.title.gsub(/[^[\w áéíúóúÁÉÍÓÚñÑ]+$]/, ''),
+    base_salary: rand(1_000_000..999_999_999),
+    start_date: Time.at(77.years.ago + rand * (1.days.from_now.to_f - 77.years.ago.to_f)),
+    termination_date: Time.at(1.days.from_now + 1.month + rand * (77.years.from_now.to_f - 1.days.from_now.to_f)),
+    contract_type: TYPES.sample
+  )
 end
+
+# Poblando la base de datos
+
+# 10.times do |n|
+#   Period.create!(
+#     start_date: Date.new(Date.today.year, (n - 10).abs),
+#     end_date: Date.new(Date.today.year, (n - 10).abs).end_of_month,
+#     state: PERIODS.sample,
+#     company_id: Company.find_by(nit: '9009261473').id
+#   )
+
+#   Period.create!(
+#     start_date: Date.new(Date.today.year, (n - 10).abs),
+#     end_date: Date.new(Date.today.year, (n - 10).abs).end_of_month,
+#     state: PERIODS.sample,
+#     company_id: Company.where.not(id: Company.find_by(nit: '9009261473').id).sample.id
+#   )
+
+#   Employee.find_by(card_id: '11111185369').company.periods.each do |period|
+#     Payroll.create!(
+#       employee_id: Employee.find_by(card_id: '11111185369').id,
+#       period_id: period.id
+#     )
+#   end
+# end
+
+# 140.times do |_n|
+#   Company.where.not(id: Company.find_by(nit: '9009261473').id).each do |company|
+#     next if company.periods.nil?
+
+#     company.periods.each do |period|
+#       company.employees.each do |employee|
+#         Payroll.create!(
+#           employee_id: employee.id,
+#           period_id: period.id,
+#           salary_income: rand(0..999_999),
+#           non_salary_income: rand(0..999_999),
+#           deduction: rand(0..999_999)
+#         )
+#       end
+#     end
+#   end
+# end
