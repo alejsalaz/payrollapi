@@ -90,6 +90,30 @@ Employee.create!(
   contract_type: 'apprenticeship'
 )
 
+Employee.create!(
+  card_id: '1864836326',
+  company_id: Company.find_by(nit: '9009261473').id,
+  full_name: 'Cristian Rojas Betancur',
+  risk_class: 'iv',
+  job_title: 'Desarrollador backend',
+  base_salary: '1300000',
+  start_date: '2022/07/18',
+  termination_date: '2023/11/17',
+  contract_type: 'fixed-term'
+)
+
+Employee.create!(
+  card_id: '1569372642',
+  company_id: Company.find_by(nit: '9009261473').id,
+  full_name: 'Carolina Diaz Gomez',
+  risk_class: 'iii',
+  job_title: 'Desarrollador backend',
+  base_salary: '1300000',
+  start_date: '2022/07/18',
+  termination_date: '2023/11/17',
+  contract_type: 'fixed-term'
+)
+
 14.times do |n|
   User.create!(
     full_name: Faker::Name.unique.name.gsub(/[^[\w áéíúóúÁÉÍÓÚñÑ]+$]/, ''),
@@ -117,8 +141,38 @@ end
     start_date: Date.new(Date.today.year, (n - 10).abs),
     end_date: Date.new(Date.today.year, (n - 10).abs).end_of_month,
     state: PERIODS.sample,
-    company_id: Company.all.sample.id
+    company_id: Company.find_by(nit: '9009261473').id
   )
+
+  Period.create!(
+    start_date: Date.new(Date.today.year, (n - 10).abs),
+    end_date: Date.new(Date.today.year, (n - 10).abs).end_of_month,
+    state: PERIODS.sample,
+    company_id: Company.where.not(id: Company.find_by(nit: '9009261473').id).sample.id
+  )
+
+  Employee.find_by(card_id: '11111185369').company.periods.each do |period|
+    Payroll.create!(
+      employee_id: Employee.find_by(card_id: '11111185369').id,
+      period_id: period.id
+    )
+  end
 end
 
-# p = Payroll.new(employee: Employee.find_by(card_id: '11111185369'), period_id: Employee.find_by(card_id: '11111185369').company.periods.last.id)
+140.times do |_n|
+  Company.where.not(id: Company.find_by(nit: '9009261473').id).each do |company|
+    next if company.periods.nil?
+
+    company.periods.each do |period|
+      company.employees.each do |employee|
+        Payroll.create!(
+          employee_id: employee.id,
+          period_id: period.id,
+          salary_income: rand(0..999_999),
+          non_salary_income: rand(0..999_999),
+          deduction: rand(0..999_999)
+        )
+      end
+    end
+  end
+end

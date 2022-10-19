@@ -6,6 +6,8 @@ class Payroll < ApplicationRecord
   belongs_to :employee
   belongs_to :period
 
+  scope :filter_by_company, ->(company_id) { where company_id: company_id }
+
   validate :valid_attributes?
 
   validates :salary_income,
@@ -38,4 +40,5 @@ class Payroll < ApplicationRecord
   after_validation :set_vacation
   after_validation :set_employer_healthcare
   after_validation :set_employer_pension
+  after_validation :set_arl
 end

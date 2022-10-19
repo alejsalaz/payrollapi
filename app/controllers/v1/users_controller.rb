@@ -9,8 +9,6 @@ module V1
 
     rescue_from StandardError, with: :render_exception
 
-    VERSION = 'v1'
-
     def index
       @users = if @current_user.role == 'admin'
                  User.all.order('email')
@@ -32,7 +30,7 @@ module V1
     end
 
     def create
-      # TODO: This should be a sign in
+      # TODO: This should be a sign in and only employees can sign in
       if %w[admin accountant].include?(@current_user.role)
         if @user.save
           render :show, status: :created

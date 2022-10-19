@@ -8,16 +8,15 @@ class Period < ApplicationRecord
 
   STATES = %w[paid draft failed].freeze
 
+  scope :filter_by_company, ->(company_id) { where company_id: company_id }
+
   validate :dates_format
   validate :dates_coherence
+  validate :dates_uniqueness, on: :create
 
   validates :start_date,
             presence: {
               code: '025'
-            },
-            uniqueness: {
-              case_sensitive: false,
-              code: '026'
             },
             inclusion: {
               in: (
@@ -29,10 +28,6 @@ class Period < ApplicationRecord
   validates :end_date,
             presence: {
               code: '028'
-            },
-            uniqueness: {
-              case_sensitive: false,
-              code: '029'
             },
             inclusion: {
               in: (

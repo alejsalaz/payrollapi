@@ -10,13 +10,12 @@ module SalaryHelper
   EMPLOYER_PENSION = 0.12
   SOLIDARITY_FUND = 0.01
   PENSION_SOLIDARITY_FUND = 0.05
-  # TODO: ARL in payroll
   ARL_PERCENTAGES = {
-    i: 0.522,
-    ii: 1.044,
-    iii: 2.436,
-    iv: 4.350,
-    v: 6.960
+    i: 0.522 / 100,
+    ii: 1.044 / 100,
+    iii: 2.436 / 100,
+    iv: 4.350 / 100,
+    v: 6.960 / 100
   }.freeze
   COMPENSATION_FUND = 0.04
   ICBF = 0.03

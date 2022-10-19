@@ -1,7 +1,13 @@
 module DateHelper
+  private
+
+  def format_date(date)
+    Date.strptime(date.to_s, '%Y-%m-%d')
+  end
+
   def dates_format
-    Date.strptime(start_date.to_s, '%Y-%m-%d')
-    Date.strptime(end_date.to_s, '%Y-%m-%d')
+    format_date(start_date)
+    format_date(end_date)
   rescue StandardError
     errors.add(
       :base,
@@ -11,16 +17,34 @@ module DateHelper
   end
 
   def dates_coherence
-    dates_difference = (
-      Date.strptime(end_date.to_s, '%Y-%m-%d') -
-      Date.strptime(start_date.to_s, '%Y-%m-%d')
-    ).to_i.abs
-    return if dates_difference > 26 && dates_difference < 31
+    return if valid_date?(start_date, :beginning_of_month) && valid_date?(end_date, :end_of_month)
 
     errors.add(
       :base,
       'las fechas inicial y final corresponden al inicio y fin del mes respectivamente ',
       code: '024'
     )
+  end
+
+  def valid_date?(date, option)
+    format_date(date).eql?(format_date(date).send(option))
+  end
+
+  def dates_uniqueness
+    return if unique_dates?
+
+    errors.add(
+      :base,
+      'la empresa solo puede tener un periodo por mes',
+      code: '024'
+    )
+  end
+
+  def unique_dates?
+    Period.filter_by_company(company_id).each do |period|
+      (format_date(period.start_date)..format_date(period.end_date)).any? do |date|
+        return false if [format_date(start_date), format_date(end_date)].include?(date)
+      end
+    end
   end
 end

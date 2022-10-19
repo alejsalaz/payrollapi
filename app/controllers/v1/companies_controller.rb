@@ -9,8 +9,6 @@ module V1
 
     rescue_from StandardError, with: :render_exception
 
-    VERSION = 'v1'
-
     def index
       if @current_user.role == 'admin'
         @companies = Company.all.order('legal_name')

@@ -1,53 +1,105 @@
-class EmployeesController < ApplicationController
-  before_action :set_employee, only: %i[ show update destroy ]
+# frozen_string_literal: true
 
-  # GET /employees
-  # GET /employees.json
-  def index
-    @employees = Employee.all
-  end
+module V1
+  class EmployeesController < ApplicationController
+    include ErrorHandler
 
-  # GET /employees/1
-  # GET /employees/1.json
-  def show
-  end
+    before_action :find_employee, only: %i[show update destroy]
+    before_action :set_employee, only: [:create]
 
-  # POST /employees
-  # POST /employees.json
-  def create
-    @employee = Employee.new(employee_params)
+    rescue_from StandardError, with: :render_exception
 
-    if @employee.save
-      render :show, status: :created, location: @employee
-    else
-      render json: @employee.errors, status: :unprocessable_entity
+    def index
+      @employees = if @current_user.role == 'admin'
+                     Employee.all.order('email')
+                   else
+                     Employee
+                       .filter_by_company(@current_user.company.id)
+                       .order('full_name')
+                   end
+
+      render :index, status: :ok
     end
-  end
 
-  # PATCH/PUT /employees/1
-  # PATCH/PUT /employees/1.json
-  def update
-    if @employee.update(employee_params)
-      render :show, status: :ok, location: @employee
-    else
-      render json: @employee.errors, status: :unprocessable_entity
+    def show
+      if @employee.present?
+        render :show, status: :ok
+      else
+        render_unauthorized
+      end
     end
-  end
 
-  # DELETE /employees/1
-  # DELETE /employees/1.json
-  def destroy
-    @employee.destroy
-  end
+    def create
+      if %w[admin accountant].include?(@current_user.role)
+        if @employee.save
+          render :show, status: :created
+        else
+          @errors = @employee.errors
+          render_error
+        end
+      else
+        render_unauthorized
+      end
+    end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
+    def update
+      if %w[admin accountant].include?(@current_user.role)
+        if @employee.update(check_params)
+          render :show, status: :ok
+        else
+          @errors = @employee.errors
+          render_error
+        end
+      else
+        render_unauthorized
+      end
+    end
+
+    def destroy
+      if %w[admin accountant].include?(@current_user.role)
+        @employee.destroy
+
+        head :no_content
+      else
+        render_unauthorized
+      end
+    end
+
+    private
+
+    # TODO: employee missing key shouldn't be allowed
+    def check_params
+      {
+        card_id: params[:employee][:card_id],
+        company_id: Company.find_by(nit: params[:employee][:company_nit]).id,
+        full_name: params[:employee][:full_name],
+        risk_class: params[:employee][:risk_class],
+        job_title: params[:employee][:job_title],
+        base_salary: params[:employee][:base_salary],
+        start_date: params[:employee][:start_date],
+        termination_date: params[:employee][:termination_date],
+        contract_type: params[:employee][:contract_type]
+      }
+    end
+
     def set_employee
-      @employee = Employee.find(params[:id])
+      @employee = Employee.new(check_params)
+    end
+
+    def find_employee
+      @employee = if @current_user.role == 'admin'
+                    Employee.find_by(card_id: [params[:id]])
+                  else
+                    Employee
+                      .filter_by_company(@current_user.company.id)
+                      .find_by(card_id: [params[:id]])
+                  end
     end
 
     # Only allow a list of trusted parameters through.
     def employee_params
-      params.require(:employee).permit(:card_id, :company_id, :full_name, :contract_id)
+      params.require(:employee).permit(:card_id, :company_nit, :full_name, :risk_class, :job_title, :base_salary,
+                                       :start_date, :termination_date, :contract_type)
     end
+  end
 end

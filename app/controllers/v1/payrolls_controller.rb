@@ -1,53 +1,106 @@
-class PayrollsController < ApplicationController
-  before_action :set_payroll, only: %i[ show update destroy ]
+# frozen_string_literal:true
 
-  # GET /payrolls
-  # GET /payrolls.json
-  def index
-    @payrolls = Payroll.all
-  end
+module V1
+  class PayrollsController < ApplicationController
+    include ErrorHandler
+    # TODO: make this work
+    include PayrollHelper
 
-  # GET /payrolls/1
-  # GET /payrolls/1.json
-  def show
-  end
+    before_action :find_payroll, only: %i[show update destroy]
+    before_action :set_payroll, only: %i[create]
 
-  # POST /payrolls
-  # POST /payrolls.json
-  def create
-    @payroll = Payroll.new(payroll_params)
+    rescue_from StandardError, with: :render_exception
 
-    if @payroll.save
-      render :show, status: :created, location: @payroll
-    else
-      render json: @payroll.errors, status: :unprocessable_entity
+    def index
+      @payrolls = case @current_user.role
+                  when 'admin'
+                    Payroll.all.order('created_at ASC')
+                  when 'accountant'
+                    Payroll
+                  .joins(:period).where(periods: { company_id: Company.find_by(id: @current_user.company.id) })
+                  .order('created_at DESC')
+                  else
+                    # TODO: an account should always belong to an employee
+                    Payroll
+                  .joins(:employee).where(employee: { full_name: @current_user.full_name })
+                  .order('created_at DESC')
+                  end
     end
-  end
 
-  # PATCH/PUT /payrolls/1
-  # PATCH/PUT /payrolls/1.json
-  def update
-    if @payroll.update(payroll_params)
-      render :show, status: :ok, location: @payroll
-    else
-      render json: @payroll.errors, status: :unprocessable_entity
+    def show
+      render :show, status: :ok
     end
-  end
 
-  # DELETE /payrolls/1
-  # DELETE /payrolls/1.json
-  def destroy
-    @payroll.destroy
-  end
+    def create
+      if %w[admin accountant].include?(@current_user.role)
+        if @payroll.save
+          render :show, status: :created
+        else
+          @errors = @payroll.errors
+          render_error
+        end
+      else
+        render_unauthorized
+      end
+    end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
+    def update
+      if %w[admin accountant].include?(@current_user.role)
+        if @payroll.update(payroll_params)
+          render :show, status: :ok
+        else
+          @errors = @payroll.errors
+          render_error
+        end
+      else
+        render_unauthorized
+      end
+    end
+
+    def destroy
+      if %w[admin accountant].include?(@current_user.role)
+        @payroll.destroy
+
+        head :no_content
+      else
+        render_unauthorized
+      end
+    end
+
+    private
+
     def set_payroll
-      @payroll = Payroll.find(params[:id])
+      @payroll = Payroll.new(payroll_params)
     end
 
-    # Only allow a list of trusted parameters through.
-    def payroll_params
-      params.require(:payroll).permit(:employee_id, :period_id, :salary_income, :non_salary_income, :deduction, :transportation, :healthcare, :pension, :solidarity_fund, :subsistence_account, :compensation_fund, :icbf, :sena, :severance, :interest, :premium, :vacation)
+    def find_payroll
+      @payroll = case @current_user.role
+                 when 'admin'
+                   Payroll.all.order('created_at ASC')
+                          .find_by(id: params[:id])
+                 when 'accountant'
+                   Payroll
+                 .joins(:period).where(periods: { company_id: Company.find_by(id: @current_user.company.id) })
+                 .order('created_at DESC')
+                 .find_by(id: params[:id])
+                 else
+                   # TODO: an account should always belong to an employee
+                   Payroll
+                 .joins(:employee).where(employee: { full_name: @current_user.full_name })
+                 .order('created_at DESC')
+                 .find_by(id: params[:id])
+                 end
     end
+
+    def payroll_params
+      # params.require(:payroll).permit(:employee_id, :payroll_id, :salary_income, :non_salary_income, :deduction, :transportation, :healthcare, :pension, :solidarity_fund, :subsistence_account, :compensation_fund, :icbf, :sena, :severance, :interest, :premium, :vacation)
+
+      {
+        start_date: params[:payroll][:start_date],
+        end_date: params[:payroll][:end_date],
+        state: params[:payroll][:state],
+        company_id: Company.find_by(nit: params[:payroll][:company_nit]).id
+      }
+    end
+  end
 end

@@ -256,3 +256,14 @@ es-CO:
       long: "%A, %d de %B de %Y a las %I:%M %p"
       short: "%d de %b a las %H:%M hrs"
     pm: pm
+  views:
+    employees:
+      apprenticeship: contrato de aprendizaje
+      fixed-term: término fijo
+      indefinite: indefinido
+      temporary: temporal
+      work_or_labor: por obra
+    periods:
+      paid: pagado
+      draft: borrador
+      failed: fallido

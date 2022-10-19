@@ -22,6 +22,8 @@ class Employee < ApplicationRecord
     'temporary'
   ].freeze
 
+  scope :filter_by_employee, ->(employee_id) { where employee_id: employee_id }
+
   validate :valid_minimum_wage?
 
   validates :card_id,

@@ -111,4 +111,8 @@ module PayrollHelper
   def set_employer_pension
     self.employer_pension = EMPLOYER_PENSION * @total_salary
   end
+
+  def set_arl
+    self.arl = ARL_PERCENTAGES[Employee.find_by(id: employee_id).risk_class.to_sym] * @total_salary
+  end
 end
