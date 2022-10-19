@@ -4,10 +4,9 @@ module V1
   class PayrollsController < ApplicationController
     include ErrorHandler
     # TODO: make this work
-    include PayrollHelper
+    include PaymentHelper
 
     before_action :find_payroll, only: %i[show update destroy]
-    before_action :set_payroll, only: %i[create]
 
     rescue_from StandardError, with: :render_exception
 
@@ -33,11 +32,11 @@ module V1
 
     def create
       if %w[admin accountant].include?(@current_user.role)
-        if @payroll.save
-          render :show, status: :created
-        else
-          @errors = @payroll.errors
-          render_error
+        begin
+          remunerate
+          render :index, status: :created
+        rescue StandardError => e
+          render json: { error: { problema: e } }, status: :unprocessable_entity
         end
       else
         render_unauthorized
@@ -68,10 +67,6 @@ module V1
     end
 
     private
-
-    def set_payroll
-      @payroll = Payroll.new(payroll_params)
-    end
 
     def find_payroll
       @payroll = case @current_user.role

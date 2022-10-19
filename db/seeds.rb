@@ -176,3 +176,6 @@ end
     end
   end
 end
+
+
+Payroll.create(employee_id: employee.id, period_id: define_period(find_company))

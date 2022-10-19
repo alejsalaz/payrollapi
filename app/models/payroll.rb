@@ -6,8 +6,6 @@ class Payroll < ApplicationRecord
   belongs_to :employee
   belongs_to :period
 
-  scope :filter_by_company, ->(company_id) { where company_id: company_id }
-
   validate :valid_attributes?
 
   validates :salary_income,
@@ -23,6 +21,13 @@ class Payroll < ApplicationRecord
   validates :deduction,
             numericality: {
               code: '035'
+            }
+
+  validates :period_id,
+            uniqueness: {
+              case_sensitive: false,
+              code: '013',
+              on: :create
             }
 
   after_validation :set_variables
