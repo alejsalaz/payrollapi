@@ -16,40 +16,40 @@ class User < ApplicationRecord
             },
             length: {
               minimum: 5,
-              code: '003'
+              code: '002'
             },
             format: {
               with: /\A[\w áéíúóúÁÉÍÓÚñÑ]+\z/,
-              code: '004'
+              code: '003'
             }
 
   validates :email,
             presence: {
-              code: '005'
+              code: '004'
             },
             uniqueness: {
-              code: '006'
+              code: '005'
             },
             format: {
               with: /\A(\S+)@(.+)\.(\S+)\z/,
-              code: '007'
+              code: '006'
             }
 
   validates :password,
             presence: {
-              code: '008'
+              code: '007'
             },
             length: {
               minimum: 6,
-              code: '009'
+              code: '008'
             }
 
   validates :role,
             presence: {
-              code: '010'
+              code: '009'
             },
             inclusion: {
               in: ROLES,
-              code: '011'
+              code: '010'
             }
 end

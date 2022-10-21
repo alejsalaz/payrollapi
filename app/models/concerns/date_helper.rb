@@ -12,7 +12,7 @@ module DateHelper
     errors.add(
       :base,
       'las fechas deben tener el formato AAAA-MM-DD',
-      code: '023'
+      code: '048'
     )
   end
 
@@ -21,8 +21,8 @@ module DateHelper
 
     errors.add(
       :base,
-      'las fechas inicial y final corresponden al inicio y fin del mes respectivamente ',
-      code: '024'
+      'las fechas inicial y final corresponden al inicio y fin del mes respectivamente',
+      code: '049'
     )
   end
 
@@ -36,7 +36,7 @@ module DateHelper
     errors.add(
       :base,
       'la empresa solo puede tener un periodo por mes',
-      code: '024'
+      code: '050'
     )
   end
 

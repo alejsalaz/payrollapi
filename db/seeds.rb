@@ -163,20 +163,20 @@ end
 #   end
 # end
 
-# 140.times do |_n|
-#   Company.where.not(id: Company.find_by(nit: '9009261473').id).each do |company|
-#     next if company.periods.nil?
+140.times do |_n|
+  Company.where.not(id: Company.find_by(nit: '9009261473').id).each do |company|
+    next if company.periods.nil?
 
-#     company.periods.each do |period|
-#       company.employees.each do |employee|
-#         Payroll.create!(
-#           employee_id: employee.id,
-#           period_id: period.id,
-#           salary_income: rand(0..999_999),
-#           non_salary_income: rand(0..999_999),
-#           deduction: rand(0..999_999)
-#         )
-#       end
-#     end
-#   end
-# end
+    company.periods.each do |period|
+      company.employees.each do |employee|
+        Payroll.create!(
+          employee_id: employee.id,
+          period_id: period.id,
+          salary_income: rand(0..999_999),
+          non_salary_income: rand(0..999_999),
+          deduction: rand(0..999_999)
+        )
+      end
+    end
+  end
+end

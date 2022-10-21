@@ -6,50 +6,51 @@ class Company < ApplicationRecord
 
   validates :nit,
             presence: {
-              code: '012'
+              code: '011'
             },
             uniqueness: {
               case_sensitive: false,
-              code: '013'
+              code: '012',
+              on: :create
             },
             length: {
               minimum: 8,
-              code: '014'
+              code: '013'
             },
             format: {
               with: /\A\d+\z/,
-              code: '015'
+              code: '014'
             }
 
   validates :legal_name,
             presence: {
-              code: '016'
+              code: '015'
             },
             uniqueness: {
               case_sensitive: false,
-              code: '017'
+              code: '016'
             },
             length: {
               minimum: 3,
-              code: '018'
+              code: '017'
             },
             format: {
               with: /\A[a-zA-Z áéíúóúÁÉÍÓÚñÑ',.-]+\z/,
-              code: '019'
+              code: '018'
             }
 
   validates :display_name,
             allow_blank: true,
             length: {
               minimum: 3,
-              code: '020'
+              code: '019'
             },
             uniqueness: {
               case_sensitive: false,
-              code: '021'
+              code: '020'
             },
             format: {
               with: /\A[a-zA-Z áéíúóúÁÉÍÓÚñÑ',.-]+\z/,
-              code: '022'
+              code: '021'
             }
 end

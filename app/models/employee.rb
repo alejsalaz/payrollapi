@@ -29,86 +29,86 @@ class Employee < ApplicationRecord
   validates :card_id,
             presence: {
               # TODO: Codes are pending
-              code: 'pending'
+              code: '022'
             },
             uniqueness: {
               case_sensitive: false,
-              code: '037'
+              code: '023'
             },
             length: {
               minimum: 8,
-              code: '038'
+              code: '024'
             },
             format: {
               with: /\A\d+\z/,
-              code: '039'
+              code: '025'
             }
 
   validates :full_name,
             presence: {
-              code: '040'
+              code: '026'
             },
             length: {
               minimum: 5,
-              code: '041'
+              code: '027'
             },
             format: {
               with: /\A[\w áéíúóúÁÉÍÓÚñÑ]+\z/,
-              code: 'pending'
+              code: '028'
             }
 
   validates :risk_class,
             presence: {
-              code: '043'
+              code: '029'
             },
             inclusion: {
               in: CLASSES,
-              code: 'pending'
+              code: '030'
             }
 
   validates :job_title,
             presence: {
-              code: '045'
+              code: '031'
             },
             length: {
               minimum: 3,
-              code: '046'
+              code: '032'
             },
             format: {
               with: /\A[\w áéíúóúÁÉÍÓÚñÑ]+\z/,
-              code: '047'
+              code: '033'
             }
 
   validates :base_salary,
             presence: {
-              code: '048'
+              code: '034'
             },
             numericality: {
-              code: '033'
+              code: '035'
             }
 
   validates :start_date,
             presence: {
-              code: 'pending'
+              code: '036'
             },
             inclusion: {
               in: ((77.years.ago)..(1.days.from_now)),
-              code: 'pending'
+              code: '037'
             }
 
   validates :termination_date,
             inclusion: {
               in: ((1.days.from_now)..(77.years.from_now)),
-              code: '053'
+              code: '038'
             }
 
   validates :contract_type,
             presence: {
-              code: '054'
+              code: '039'
             },
             inclusion: {
               in: TYPES,
-              code: '055'
+              code: '040'
             }
 
   private
@@ -122,7 +122,7 @@ class Employee < ApplicationRecord
     errors.add(
       :base,
       'la cantidad ingresada es incorrecta',
-      code: '049'
+      code: '041'
     )
   end
 end

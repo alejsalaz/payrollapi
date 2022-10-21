@@ -18,33 +18,33 @@ class Period < ApplicationRecord
 
   validates :start_date,
             presence: {
-              code: '025'
+              code: '042'
             },
             inclusion: {
               in: (
                 (Date.new(Date.today.year, Date.today.month) - 2.years)..
                 (Date.new(Date.today.year, Date.today.month))
               ),
-              code: '027'
+              code: '043'
             }
   validates :end_date,
             presence: {
-              code: '028'
+              code: '044'
             },
             inclusion: {
               in: (
                 (Date.new(Date.today.year, Date.today.month) - 2.years).end_of_month..
                 (Date.new(Date.today.year, Date.today.month).end_of_month)
               ),
-              code: '030'
+              code: '045'
             }
 
   validates :state,
             presence: {
-              code: '031'
+              code: '046'
             },
             inclusion: {
               in: STATES,
-              code: '032'
+              code: '047'
             }
 end

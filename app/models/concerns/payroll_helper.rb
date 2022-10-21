@@ -28,7 +28,7 @@ module PayrollHelper
     errors.add(
       :base,
       'Ha ingresado parámetros no autorizados',
-      code: '036'
+      code: '055'
     )
   end
 
