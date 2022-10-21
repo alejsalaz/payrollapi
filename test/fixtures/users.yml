@@ -5,15 +5,18 @@ valid_user:
   email: adria@koch.io
   password_digest: <%= BCrypt::Password.create('K0qLnU56c948V') %>
   company: valid_company
+  role: admin
 
 another_valid_user:
   full_name: Brianne Schmitt
   email: shirlene@torphylindgren.info
   password_digest: <%= BCrypt::Password.create('FwBkT4zD6qY') %>
   company: valid_company
+  role: accountant
 
 invalid_user:
   full_name: R1ch3ll3 L@ng
   email: carl_swift@hills-hand
   password_digest: <%= BCrypt::Password.create('HoO') %>
   company: invalid_company
+  role: user
