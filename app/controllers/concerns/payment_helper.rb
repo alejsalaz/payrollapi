@@ -14,7 +14,6 @@ module PaymentHelper
         period_id: find_company.periods.last.id
       )
     end
-
-    @payrolls = @current_user.company.periods.last.payrolls
+    @payrolls = find_company.periods.last.payrolls
   end
 end

@@ -5,28 +5,29 @@ class Payroll < ApplicationRecord
 
   belongs_to :employee
   belongs_to :period
+  has_one :company, through: :employee
 
   validate :valid_attributes?, on: :create unless Rails.env.test?
 
   validates :salary_income,
             numericality: {
-              code: '033'
+              code: '051'
             }
 
   validates :non_salary_income,
             numericality: {
-              code: '034'
+              code: '052'
             }
 
   validates :deduction,
             numericality: {
-              code: '035'
+              code: '053'
             }
 
   validates :employee,
             uniqueness: {
               scope: :period,
-              code: '013',
+              code: '054',
               on: :create
             }
 

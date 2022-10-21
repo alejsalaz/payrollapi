@@ -66,7 +66,7 @@ module V1
     end
 
     def find_period
-      @period = if @current_user == 'admin'
+      @period = if @current_user.role == 'admin'
                   Period.find_by(id: params[:id])
                 else
                   Period
