@@ -159,7 +159,7 @@ Crea un objeto **User** con los valores dados.
 | ----- | ------ | --------- |
 | user  | Object | Requerido |
 
-- Model parameters:
+- User parameters:
 
 | Llave     | Tipo       | Descripción                                                                                             | Nota      |
 | --------- | ---------- | ------------------------------------------------------------------------------------------------------- | --------- |
@@ -198,7 +198,7 @@ Actualiza un objeto **User** con el **id** y los valores dados.
 | ----- | ------ | --------- |
 | user  | Object | Requerido |
 
-- Model parameters:
+- User parameters:
 
 | Llave     | Tipo       | Descripción                                                                                             | Nota       |
 | --------- | ---------- | ------------------------------------------------------------------------------------------------------- | ---------- |
@@ -297,7 +297,7 @@ Devuelve una lista de los objetos **Company**.
 
 ### GET /companies/{id}
 
-Devuelve un objeto **Company** con el **nit** proporcionado.
+Devuelve un objeto **Company** con el **id** proporcionado.
 
 - Header parameters:
 
@@ -341,7 +341,7 @@ Crea un objeto **Company** con los valores dados.
 | ------- | ------ | --------- |
 | company | Object | Requerido |
 
-- Model parameters:
+- Company parameters:
 
 | Llave        | Tipo   | Descripción                                                                       | Nota      |
 | ------------ | ------ | --------------------------------------------------------------------------------- | --------- |
@@ -379,7 +379,7 @@ Actualiza un objeto **Company** con el **nit** y los valores dados.
 | ------- | ------ | --------- |
 | company | Object | Requerido |
 
-- Model parameters:
+- Company parameters:
 
 | Llave        | Tipo   | Descripción                                                                       | Nota      |
 | ------------ | ------ | --------------------------------------------------------------------------------- | --------- |
@@ -498,7 +498,7 @@ Devuelve una lista de los objetos **Employee**.
 
 ### GET /employees/{card_id}
 
-Devuelve un objeto **Employee** con el **id** (número de cédula) proporcionado.
+Devuelve un objeto **Employee** con el **card_id** (número de cédula) proporcionado.
 
 - Header parameters:
 
@@ -547,7 +547,7 @@ Crea un objeto **Employee** con los valores dados.
 | -------- | ------ | --------- |
 | employee | Object | Requerido |
 
-- Model parameters:
+- Employee parameters:
 
 | Llave            | Tipo       | Descripción                                                                                                                                    | Nota      |
 | ---------------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
@@ -577,7 +577,7 @@ Actualiza un objeto **Employee** con el **id** (número de cédula) y los valore
 | -------- | ------ | --------- |
 | employee | Object | Requerido |
 
-- Model parameters:
+- Employee parameters:
 
 | Llave            | Tipo       | Descripción                                                                                                                                    | Nota      |
 | ---------------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
@@ -716,7 +716,7 @@ Crea un objeto **Period** con los valores dados.
 | ------ | ------ | --------- |
 | period | Object | Requerido |
 
-- Model parameters:
+- Period parameters:
 
 | Llave       | Tipo       | Descripción                                                                                                                                                          | Nota      |
 | ----------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
@@ -755,7 +755,7 @@ Actualiza un objeto **Period** con el **id** y los valores dados.
 | ------ | ------ | --------- |
 | period | Object | Requerido |
 
-- Model parameters:
+- Period parameters:
 
 | Llave       | Tipo       | Descripción                                                                                                                                                          | Nota      |
 | ----------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
@@ -985,7 +985,7 @@ Crea un objeto **Payroll** con los valores dados.
 | ------- | ------ | --------- |
 | payroll | Object | Requerido |
 
-- Model parameters:
+- Payroll parameters:
 
 | Llave       | Tipo | Descripción                                           | Nota      |
 | ----------- | ---- | ----------------------------------------------------- | --------- |
@@ -1048,7 +1048,7 @@ Actualiza un objeto **Payroll** con el **id** y los valores dados.
 | ------- | ------ | --------- |
 | payroll | Object | Requerido |
 
-- Model parameters:
+- Payroll parameters:
 
 | Llave             | Tipo    | Descripción                              | Nota      |
 | ----------------- | ------- | ---------------------------------------- | --------- |
