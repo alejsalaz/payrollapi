@@ -27,7 +27,11 @@ module V1
     end
 
     def show
-      render :show, status: :ok
+      if @payroll.present?
+        render :show, status: :ok
+      else
+        render_unauthorized
+      end
     end
 
     def create

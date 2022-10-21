@@ -20,7 +20,11 @@ module V1
     end
 
     def show
-      render :show, status: :ok
+      if @period.present?
+        render :show, status: :ok
+      else
+        render_unauthorized
+      end
     end
 
     def create
@@ -76,7 +80,6 @@ module V1
     end
 
     def period_params
-      # params.require(:period).permit(:start_date, :end_date, :state, :company_nit)
       {
         start_date: params[:period][:start_date],
         end_date: params[:period][:end_date],

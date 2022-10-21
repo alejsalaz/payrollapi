@@ -8,6 +8,7 @@ module V1
 
     setup do
       @token = auth_tokens_for_user(users(:valid_user))
+      @company = companies(:valid_company)
     end
 
     should rescue_from(StandardError)
@@ -25,14 +26,14 @@ module V1
       .to(controller: :'v1/companies', action: :destroy, id: 1)
 
     test 'should get index' do
-      get '/v1/companies/index', headers: {
+      get '/v1/companies', headers: {
         Authorization: @token
       }, as: :json
       assert_response :success
     end
 
-    test 'should get show' do
-      get '/v1/companies/1', headers: {
+    test 'should show company' do
+      get "/v1/companies/#{@company.id}", headers: {
         Authorization: @token
       }, as: :json
       assert_response :success
