@@ -132,9 +132,9 @@ Devuelve una lista de los objetos **User**.
 
 - Header parameters:
 
-| Llave         | Tipo   | Descripción | Nota      |
-| ------------- | ------ | ----------- | --------- |
-| Authorization | String | @@@         | Requerido |
+| Llave         | Tipo   | Descripción                  | Nota      |
+| ------------- | ------ | ---------------------------- | --------- |
+| Authorization | String | Token devuelto en el `login` | Requerido |
 
 - Ejemplo de respuesta exitosa:
 
@@ -165,9 +165,9 @@ Devuelve un objeto **User** con el **id** proporcionado.
 
 - Header parameters:
 
-| Llave         | Tipo   | Descripción | Nota      |
-| ------------- | ------ | ----------- | --------- |
-| Authorization | String | @@@         | Requerido |
+| Llave         | Tipo   | Descripción                  | Nota      |
+| ------------- | ------ | ---------------------------- | --------- |
+| Authorization | String | Token devuelto en el `login` | Requerido |
 
 - Query y path parameters:
 
@@ -195,9 +195,9 @@ Crea un objeto **User** con los valores dados.
 
 - Header parameters:
 
-| Llave         | Tipo   | Descripción | Nota      |
-| ------------- | ------ | ----------- | --------- |
-| Authorization | String | @@@         | Requerido |
+| Llave         | Tipo   | Descripción                  | Nota      |
+| ------------- | ------ | ---------------------------- | --------- |
+| Authorization | String | Token devuelto en el `login` | Requerido |
 
 - Body parameters:
 
@@ -234,9 +234,9 @@ Actualiza un objeto **User** con el **id** y los valores dados.
 
 - Header parameters:
 
-| Llave         | Tipo   | Descripción | Nota      |
-| ------------- | ------ | ----------- | --------- |
-| Authorization | String | @@@         | Requerido |
+| Llave         | Tipo   | Descripción                  | Nota      |
+| ------------- | ------ | ---------------------------- | --------- |
+| Authorization | String | Token devuelto en el `login` | Requerido |
 
 - Body parameters:
 
@@ -274,9 +274,9 @@ Elimina un objeto **User** con el **id** proporcionado.
 
 - Header parameters:
 
-| Llave         | Tipo   | Descripción | Nota      |
-| ------------- | ------ | ----------- | --------- |
-| Authorization | String | @@@         | Requerido |
+| Llave         | Tipo   | Descripción                  | Nota      |
+| ------------- | ------ | ---------------------------- | --------- |
+| Authorization | String | Token devuelto en el `login` | Requerido |
 
 - Query y path parameters:
 
@@ -315,9 +315,9 @@ Devuelve una lista de los objetos **Company**.
 
 - Header parameters:
 
-| Llave         | Tipo   | Descripción | Nota      |
-| ------------- | ------ | ----------- | --------- |
-| Authorization | String | @@@         | Requerido |
+| Llave         | Tipo   | Descripción                  | Nota      |
+| ------------- | ------ | ---------------------------- | --------- |
+| Authorization | String | Token devuelto en el `login` | Requerido |
 
 - Ejemplo de respuesta exitosa:
 
@@ -347,9 +347,9 @@ Devuelve un objeto **Company** con el **id** proporcionado.
 
 - Header parameters:
 
-| Llave         | Tipo   | Descripción | Nota      |
-| ------------- | ------ | ----------- | --------- |
-| Authorization | String | @@@         | Requerido |
+| Llave         | Tipo   | Descripción                  | Nota      |
+| ------------- | ------ | ---------------------------- | --------- |
+| Authorization | String | Token devuelto en el `login` | Requerido |
 
 - Query y path parameters:
 
@@ -377,9 +377,9 @@ Crea un objeto **Company** con los valores dados.
 
 - Header parameters:
 
-| Llave         | Tipo   | Descripción | Nota      |
-| ------------- | ------ | ----------- | --------- |
-| Authorization | String | @@@         | Requerido |
+| Llave         | Tipo   | Descripción                  | Nota      |
+| ------------- | ------ | ---------------------------- | --------- |
+| Authorization | String | Token devuelto en el `login` | Requerido |
 
 - Body parameters:
 
@@ -415,9 +415,9 @@ Actualiza un objeto **Company** con el **nit** y los valores dados.
 
 - Header parameters:
 
-| Llave         | Tipo   | Descripción | Nota      |
-| ------------- | ------ | ----------- | --------- |
-| Authorization | String | @@@         | Requerido |
+| Llave         | Tipo   | Descripción                  | Nota      |
+| ------------- | ------ | ---------------------------- | --------- |
+| Authorization | String | Token devuelto en el `login` | Requerido |
 
 - Body parameters:
 
@@ -454,9 +454,9 @@ Elimina un objeto **Company** con el **nit** proporcionado.
 
 - Header parameters:
 
-| Llave         | Tipo   | Descripción | Nota      |
-| ------------- | ------ | ----------- | --------- |
-| Authorization | String | @@@         | Requerido |
+| Llave         | Tipo   | Descripción                  | Nota      |
+| ------------- | ------ | ---------------------------- | --------- |
+| Authorization | String | Token devuelto en el `login` | Requerido |
 
 - Query y path parameters:
 
@@ -492,8 +492,8 @@ El objeto **Employee** es usado para representar un empleado de una empresa.
 | Obtener lista de todos los empleados registrados | Limitado       | Limitado              | Sí                    |
 | Consultar un empleado específico                 | Limitado       | Limitado              | Sí                    |
 | Registrar un empleado nuevo                      | No             | Limitado              | Sí                    |
-| Actualizar los datos de una empresa              | No             | Limitado              | Sí                    |
-| Eliminar un usuario                              | No             | Limitado              | Sí                    |
+| Actualizar los datos de un empleado              | No             | Limitado              | Sí                    |
+| Eliminar un empleado                             | No             | Limitado              | Sí                    |
 
 ### GET /employees
 
@@ -501,9 +501,9 @@ Devuelve una lista de los objetos **Employee**.
 
 - Header parameters:
 
-| Llave         | Tipo   | Descripción | Nota      |
-| ------------- | ------ | ----------- | --------- |
-| Authorization | String | @@@         | Requerido |
+| Llave         | Tipo   | Descripción                  | Nota      |
+| ------------- | ------ | ---------------------------- | --------- |
+| Authorization | String | Token devuelto en el `login` | Requerido |
 
 - Ejemplo de respuesta exitosa:
 
@@ -548,9 +548,9 @@ Devuelve un objeto **Employee** con el **card_id** (número de cédula) proporci
 
 - Header parameters:
 
-| Llave         | Tipo   | Descripción | Nota      |
-| ------------- | ------ | ----------- | --------- |
-| Authorization | String | @@@         | Requerido |
+| Llave         | Tipo   | Descripción                  | Nota      |
+| ------------- | ------ | ---------------------------- | --------- |
+| Authorization | String | Token devuelto en el `login` | Requerido |
 
 - Query y path parameters:
 
@@ -583,9 +583,9 @@ Crea un objeto **Employee** con los valores dados.
 
 - Header parameters:
 
-| Llave         | Tipo   | Descripción | Nota      |
-| ------------- | ------ | ----------- | --------- |
-| Authorization | String | @@@         | Requerido |
+| Llave         | Tipo   | Descripción                  | Nota      |
+| ------------- | ------ | ---------------------------- | --------- |
+| Authorization | String | Token devuelto en el `login` | Requerido |
 
 - Body parameters:
 
@@ -613,9 +613,9 @@ Actualiza un objeto **Employee** con el **id** (número de cédula) y los valore
 
 - Header parameters:
 
-| Llave         | Tipo   | Descripción | Nota      |
-| ------------- | ------ | ----------- | --------- |
-| Authorization | String | @@@         | Requerido |
+| Llave         | Tipo   | Descripción                  | Nota      |
+| ------------- | ------ | ---------------------------- | --------- |
+| Authorization | String | Token devuelto en el `login` | Requerido |
 
 - Body parameters:
 
@@ -643,9 +643,9 @@ Elimina un objeto **Employee** con el **id** (número de cédula) proporcionado.
 
 - Header parameters:
 
-| Llave         | Tipo   | Descripción | Nota      |
-| ------------- | ------ | ----------- | --------- |
-| Authorization | String | @@@         | Requerido |
+| Llave         | Tipo   | Descripción                  | Nota      |
+| ------------- | ------ | ---------------------------- | --------- |
+| Authorization | String | Token devuelto en el `login` | Requerido |
 
 - Query y path parameters:
 
@@ -685,9 +685,9 @@ Devuelve una lista de los objetos **Period**.
 
 - Header parameters:
 
-| Llave         | Tipo   | Descripción | Nota      |
-| ------------- | ------ | ----------- | --------- |
-| Authorization | String | @@@         | Requerido |
+| Llave         | Tipo   | Descripción                  | Nota      |
+| ------------- | ------ | ---------------------------- | --------- |
+| Authorization | String | Token devuelto en el `login` | Requerido |
 
 - Ejemplo de respuesta exitosa:
 
@@ -722,9 +722,9 @@ Devuelve un objeto **Period** con el **id** proporcionado.
 
 - Header parameters:
 
-| Llave         | Tipo   | Descripción | Nota      |
-| ------------- | ------ | ----------- | --------- |
-| Authorization | String | @@@         | Requerido |
+| Llave         | Tipo   | Descripción                  | Nota      |
+| ------------- | ------ | ---------------------------- | --------- |
+| Authorization | String | Token devuelto en el `login` | Requerido |
 
 - Query y path parameters:
 
@@ -752,9 +752,9 @@ Crea un objeto **Period** con los valores dados.
 
 - Header parameters:
 
-| Llave         | Tipo   | Descripción | Nota      |
-| ------------- | ------ | ----------- | --------- |
-| Authorization | String | @@@         | Requerido |
+| Llave         | Tipo   | Descripción                  | Nota      |
+| ------------- | ------ | ---------------------------- | --------- |
+| Authorization | String | Token devuelto en el `login` | Requerido |
 
 - Body parameters:
 
@@ -791,9 +791,9 @@ Actualiza un objeto **Period** con el **id** y los valores dados.
 
 - Header parameters:
 
-| Llave         | Tipo   | Descripción | Nota      |
-| ------------- | ------ | ----------- | --------- |
-| Authorization | String | @@@         | Requerido |
+| Llave         | Tipo   | Descripción                  | Nota      |
+| ------------- | ------ | ---------------------------- | --------- |
+| Authorization | String | Token devuelto en el `login` | Requerido |
 
 - Body parameters:
 
@@ -831,9 +831,9 @@ Elimina un objeto **Period** con el **id** proporcionado.
 
 - Header parameters:
 
-| Llave         | Tipo   | Descripción | Nota      |
-| ------------- | ------ | ----------- | --------- |
-| Authorization | String | @@@         | Requerido |
+| Llave         | Tipo   | Descripción                  | Nota      |
+| ------------- | ------ | ---------------------------- | --------- |
+| Authorization | String | Token devuelto en el `login` | Requerido |
 
 - Query y path parameters:
 
@@ -888,9 +888,9 @@ Devuelve una lista de los objetos **Payroll**.
 
 - Header parameters:
 
-| Llave         | Tipo   | Descripción | Nota      |
-| ------------- | ------ | ----------- | --------- |
-| Authorization | String | @@@         | Requerido |
+| Llave         | Tipo   | Descripción                  | Nota      |
+| ------------- | ------ | ---------------------------- | --------- |
+| Authorization | String | Token devuelto en el `login` | Requerido |
 
 - Ejemplo de respuesta exitosa:
 
@@ -969,9 +969,9 @@ Devuelve un objeto **Payroll** con el **id** proporcionado.
 
 - Header parameters:
 
-| Llave         | Tipo   | Descripción | Nota      |
-| ------------- | ------ | ----------- | --------- |
-| Authorization | String | @@@         | Requerido |
+| Llave         | Tipo   | Descripción                  | Nota      |
+| ------------- | ------ | ---------------------------- | --------- |
+| Authorization | String | Token devuelto en el `login` | Requerido |
 
 - Query y path parameters:
 
@@ -1021,9 +1021,9 @@ Crea un objeto **Payroll** con los valores dados.
 
 - Header parameters:
 
-| Llave         | Tipo   | Descripción | Nota      |
-| ------------- | ------ | ----------- | --------- |
-| Authorization | String | @@@         | Requerido |
+| Llave         | Tipo   | Descripción                  | Nota      |
+| ------------- | ------ | ---------------------------- | --------- |
+| Authorization | String | Token devuelto en el `login` | Requerido |
 
 - Body parameters:
 
@@ -1084,9 +1084,9 @@ Actualiza un objeto **Payroll** con el **id** y los valores dados.
 
 - Header parameters:
 
-| Llave         | Tipo   | Descripción | Nota      |
-| ------------- | ------ | ----------- | --------- |
-| Authorization | String | @@@         | Requerido |
+| Llave         | Tipo   | Descripción                  | Nota      |
+| ------------- | ------ | ---------------------------- | --------- |
+| Authorization | String | Token devuelto en el `login` | Requerido |
 
 - Body parameters:
 
@@ -1146,9 +1146,9 @@ Elimina un objeto **Period** con el **id** proporcionado.
 
 - Header parameters:
 
-| Llave         | Tipo   | Descripción | Nota      |
-| ------------- | ------ | ----------- | --------- |
-| Authorization | String | @@@         | Requerido |
+| Llave         | Tipo   | Descripción                  | Nota      |
+| ------------- | ------ | ---------------------------- | --------- |
+| Authorization | String | Token devuelto en el `login` | Requerido |
 
 - Query y path parameters:
 
